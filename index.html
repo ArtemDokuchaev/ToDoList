@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>To Do list</title>
+</head>
+<body>
+	
+	<div id="app">
+
+		<input type="text" v-model="newTask">
+		<button v-on:click="addTask">Add new task</button>
+		
+		<div class="tasks">
+			<div class="task" 	v-for="(task, key) in reverseList">
+				
+				<div class="text">
+					{{ task }}
+				</div>
+
+				<div class="toolBox">
+					<button v-on:click="deleteTask(key)">Х</button>
+					<button v-on:click="editTask">Edit</button>
+				</div>
+
+			</div>		
+		</div>
+
+	</div>
+	
+	<link rel="stylesheet" href="./styles.css">
+	<script src="https://unpkg.com/vue@2.5.13/dist/vue.js"></script>
+	
+	
+	<script>
+
+		new Vue({
+
+			el:'#app',
+			data: {
+				
+				newTask:'',
+				toDoList: [ 'Joe', 'John', 'Mark', 'Jack' ],
+				isClicked: false,
+
+			},
+
+			computed: {
+			    reverseList() {
+			        return this.toDoList.slice().reverse();
+			  	}     
+			},
+
+			methods: {
+				
+				addTask() {
+
+					this.toDoList.push(this.newTask);
+					this.newTask = '';
+
+				},
+			
+				deleteTask( key ) {
+					this.toDoList.splice(key, 1)
+				},
+
+				editTask() {
+
+				}
+
+			},
+		
+		})
+
+	</script>
+</body>
+</html>
