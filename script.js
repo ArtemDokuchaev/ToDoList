@@ -1,23 +1,43 @@
+
+
 new Vue({
 
 			el:'#app',
 			data: {
 				
-				newName:'',
-				names: [ 'Joe', 'John', 'Mark', 'Jack' ]
+				newTask:'',
+				toDoList: [ 
+					{ description: 'Go to store'}, 
+					{ description: 'Wash the car'},
+					{ description: 'Clean the room'},
+					{ description: 'Walk the dog'} ],
+				isClicked: false,
 
+			},
+
+			computed: {
+			    reverseList() {
+			        return this.toDoList.slice().reverse();
+			  	}     
 			},
 
 			methods: {
 				
-				addName(){
+				addTask() {
 
-					this.names.push(this.newName);
-					this.newName = '';
+					this.toDoList.push(this.newTask);
+					this.newTask = '';
+
+				},
+			
+				deleteTask( key ) {
+					this.toDoList.splice(key, 1)
+				},
+
+				editTask() {
 
 				}
-			
 
 			},
 		
-		})
+})
