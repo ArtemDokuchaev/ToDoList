@@ -14,14 +14,10 @@
 		<div class="tasks">
 			<div class="task" v-for="(task, key) in toDoList">
 				
-				<div class="text">
-					{{ task.description }}
-					{{ key }}
-				</div>
+				<task v-bind:task="task">{{task.description}}</task>
 
 				<div class="toolBox">
 					<button v-on:click="deleteTask(key)">Х</button>
-					<button v-on:click="editTask">Edit</button>
 				</div>
 
 			</div>		

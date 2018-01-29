@@ -1,4 +1,26 @@
+var toDoComponent = Vue.extend({
+	data: function() {
+		return {
+			inEditMode: false
+		}
+	},
+	props: ['task'],
+	template: `
+	<div>
+		<span class="text" v-on:click="Clicked" v-show="!inEditMode"><slot></slot></span>
+		<input class ="text" v-on:keyup.enter="Saved" v-show="inEditMode" v-model="task.description"></input>
+	</div>`,
+	methods: {
+		Clicked() {
+			this.inEditMode = true;
+		},
+		Saved() {
+			this.inEditMode = false;
+		}
+	}
+});
 
+Vue.component('task', toDoComponent);
 
 new Vue({
 
@@ -25,7 +47,7 @@ new Vue({
 				
 				addTask() {
 
-					this.toDoList.push(this.newTask);
+					this.toDoList.push({description:this.newTask});
 					this.newTask = '';
 
 				},
